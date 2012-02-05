@@ -6,6 +6,7 @@ gem 'compass', "~>0.11.6"
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'thin'
+gem 'rake'
 
 group :development do
   gem 'sqlite3'
