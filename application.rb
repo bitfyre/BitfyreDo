@@ -5,7 +5,8 @@ require "sinatra/activerecord"
 # Usage: partial :foo
 # 
 # foo will be rendered once for each element in the array, passing in a local variable named "foo"
-# Usage: partial :foo, :collection => @my_foos    
+# Usage: partial :foo, :collection => @my_foos
+## Pulled from the Sinatra docs
 
 helpers do
   def partial(template, *args)
@@ -35,12 +36,13 @@ class TaskList < ActiveRecord::Base
 end
 
 class Task < ActiveRecord::Base
-  attr_accessible :task
-
+  attr_accessible :name, :task_list_id, :completed_at
+  
   belongs_to :task_list
-
-  validates :list_name,  :presence => true,
+  
+  validates :name,  :presence => true,
             :uniqueness => { :case_sensitive => false }
+  validates :task_list_id, :presence => true
 end
 
 get '/' do
@@ -66,5 +68,11 @@ end
 get '/lists/:id' do
   task_list = TaskList.find(params[:id])
   @title = "#{task_list.list_name} | Bitfyre's Todos"
+  @list_id = 1
   haml :'lists/list'
+end
+
+post '/tasks/?' do
+  @task = Task.create(params['task'])
+  redirect to("/lists/#{@task.task_list_id}")
 end

@@ -1,6 +1,7 @@
-%form{:action => "/#{params[:id]}", :method => "post"}
+%form{:action => "/tasks/", :method => "post"}
   %ol
     %li
+      %input{:type => "hidden", :name => "task[task_list_id]", :value => params[:id]}
       %label{:for => "task-name"}
       %input#task-name{:type => "text", :name => "task[name]"}
     %li
