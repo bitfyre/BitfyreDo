@@ -19,6 +19,15 @@ get '/lists/?' do
   haml :'lists/index'
 end
 
+post '/lists/?' do
+  @list = TaskList.create(:list_name => params["list-name"])
+  if @list.valid?
+    haml :'lists/success'
+  else
+    haml :index
+  end
+end
+
 get '/lists/:id' do
   task_list = TaskList.find(params[:id])
   @title = "#{task_list.list_name} | Bitfyre's Todos"

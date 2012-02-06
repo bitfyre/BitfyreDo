@@ -1,5 +1,6 @@
 %h1= @title
 %ol
   - @lists.each do |list|
-    %li= list.list_name
+    %li
+      %a{:href => "/lists/#{list.id}"}= list.list_name
 
