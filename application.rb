@@ -13,3 +13,14 @@ get '/' do
   haml :index
 end
 
+get '/lists/?' do
+  @title = "Lists | Bitfyre's Todos"
+  @lists = TaskList.all
+  haml :'lists/index'
+end
+
+get '/lists/:id' do
+  task_list = TaskList.find(params[:id])
+  @title = "#{task_list.list_name} | Bitfyre's Todos"
+  haml :'lists/list'
+end
