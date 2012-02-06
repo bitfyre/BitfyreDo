@@ -76,3 +76,16 @@ post '/tasks/?' do
   @task = Task.create(params['task'])
   redirect to("/lists/#{@task.task_list_id}")
 end
+
+put '/tasks/:id' do
+  task = Task.find(params[:id])
+  task.completed_at = task.completed_at.nil? ? Time.now : nil
+  task.save
+  redirect to("/lists/#{task.task_list_id}")
+end
+
+delete '/tasks/:id' do
+  task = Task.find(params[:id])
+  task.destroy
+  redirect to("/lists/#{task.task_list_id}")
+end
