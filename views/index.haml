@@ -1,0 +1,8 @@
+%h1= @title
+%form{:action => "/", :method => "post"}
+  %ol
+    %li
+      %label{:for => "list-name"}
+      %input#list-name{:type => "text", :name => "list-name"}
+    %li
+      %button Create
