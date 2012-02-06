@@ -1,3 +1,16 @@
 %h1= @title
 
 = partial :_form_create_task
+%ul.tasks
+  - @tasks.each do |t|
+    %li{:class => t.completed_at.nil? ? "" : "completed"}
+      = t.name
+      %form.update{:action => "/tasks/#{t.id}", :method => "POST"}
+        %input{:type => "hidden", :name => "_method", :value => "PUT"}
+        - if t.completed_at.nil?
+          %input{:type => "submit", :value => "  ", :title => "Complete Task"}
+        - else
+          %input{:type => "submit", :value => "✓", :title => "Uncomplete Task"}
+      %form.delete{:action => "/tasks/#{t.id}", :method => "POST"}
+        %input{:type => "hidden", :name => "_method", :value => "DELETE"}
+        %input{:type => "submit", :value => "×", :title => "Delete Task"}

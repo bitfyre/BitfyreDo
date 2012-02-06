@@ -67,8 +67,8 @@ end
 
 get '/lists/:id' do
   task_list = TaskList.find(params[:id])
+  @tasks = Task.where(:task_list_id => params[:id])
   @title = "#{task_list.list_name} | Bitfyre's Todos"
-  @list_id = 1
   haml :'lists/list'
 end
 
