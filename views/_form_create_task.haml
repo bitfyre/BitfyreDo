@@ -1,0 +1,7 @@
+%form{:action => "/#{params[:id]}", :method => "post"}
+  %ol
+    %li
+      %label{:for => "task-name"}
+      %input#task-name{:type => "text", :name => "task[name]"}
+    %li
+      %button Create
