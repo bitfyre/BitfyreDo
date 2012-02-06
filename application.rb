@@ -2,10 +2,14 @@ require "sinatra"
 require "sinatra/activerecord"
 
 class TaskList < ActiveRecord::Base
-  validates_uniqueness_of :list_name
-  validates_presence_of   :list_name
+  attr_accessible :list_name
+
+  validates :list_name,  :presence => true,
+            :uniqueness => { :case_sensitive => false }
 end
 
 get '/' do
-  "Bitfyre's Todos"
+  @title = "Bitfyre's Todos"
+  haml :index
 end
+
