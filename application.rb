@@ -4,6 +4,17 @@ require "sinatra/activerecord"
 class TaskList < ActiveRecord::Base
   attr_accessible :list_name
 
+  has_many :tasks, :dependent => :destroy
+
+  validates :list_name,  :presence => true,
+            :uniqueness => { :case_sensitive => false }
+end
+
+class Task < ActiveRecord::Base
+  attr_accessible :task
+
+  belongs_to :task_list
+
   validates :list_name,  :presence => true,
             :uniqueness => { :case_sensitive => false }
 end
