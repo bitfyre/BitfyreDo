@@ -1,11 +1,6 @@
 %h1= @title
+
 - if  @list.present? && !@list.valid?
   %h2= @list.list_name + " is already a list"
-  
-%form{:action => "/lists/", :method => "post"}
-  %ol
-    %li
-      %label{:for => "list-name"}
-      %input#list-name{:type => "text", :name => "list-name"}
-    %li
-      %button Create
+
+= partial :_form_create_list
